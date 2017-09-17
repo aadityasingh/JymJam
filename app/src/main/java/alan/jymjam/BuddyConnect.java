@@ -32,25 +32,14 @@ public class BuddyConnect extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-<<<<<<< HEAD
-        //begin random copy-pasted stuff
-        final Socket socket;
-        try{
-            socket = IO.socket("http://18.189.101.95:1234");
-=======
         Bundle inBundle = getIntent().getExtras();
         name = inBundle.get("name").toString();
         surname = inBundle.get("surname").toString();
         imageUrl = inBundle.get("imageUrl").toString();
-
-        String ipad = "18.189.101.95";
-        final Client socket = new Client(ipad, 1234);
-        socket.setClientCallback(new Client.ClientCallback () {
-            @Override
-            public void onMessage(String message) {
-            }
->>>>>>> 79ba5f73b73f899b15ea147cdab243737b2a3ddb
-
+        //begin random copy-pasted stuff
+        final Socket socket;
+        try{
+            socket = IO.socket("http://18.189.101.95:1234");
             socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
 
                 @Override
