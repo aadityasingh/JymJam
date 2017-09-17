@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -54,6 +55,7 @@ public class Login extends AppCompatActivity {
         profileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
+                Profile.setCurrentProfile(newProfile);
                 nextActivity(newProfile);
             }
         };
@@ -139,16 +141,18 @@ public class Login extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
         super.onActivityResult(requestCode, responseCode, intent);
         //Facebook login
-        callbackManager.onActivityResult(requestCode, responseCode, intent);
+        if (callbackManager.onActivityResult(requestCode, responseCode, intent)) {
+            return;
+        }
 
     }
     private void nextActivity(Profile profile){
         if(profile != null){
-            Intent main = new Intent(Login.this, UserInterface.class);
-            main.putExtra("name", profile.getFirstName());
-            main.putExtra("surname", profile.getLastName());
-            main.putExtra("imageUrl", profile.getProfilePictureUri(200,200).toString());
-            startActivity(main);
+            Intent next = new Intent(Login.this, UserInterface.class);
+            next.putExtra("name", profile.getFirstName());
+            next.putExtra("surname", profile.getLastName());
+            next.putExtra("imageUrl", profile.getProfilePictureUri(200,200).toString());
+            startActivity(next);
         }
     }
 
