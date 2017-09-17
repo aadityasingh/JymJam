@@ -1,9 +1,11 @@
 package alan.jymjam;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -25,12 +27,22 @@ public class BuddyConnect extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                data = new String[5];
-                //{getName();, getPhone();, getDate();, getTime();, getGym();, getLevel();, getWorkout();};
+                data = new String[7];
+                data[0] = getName();
+                data[1] = getPhone();
+                data[2] = getDate();
+                data[3] = getTime();
+                data[4] = getGym();
+                data[5] = getLevel();
+                data[6] = getWorkout();
                 int duration = Toast.LENGTH_LONG;
-                String text = "Finding other users...";
+                String text = "Application succesfully sent...";
                 Toast to = Toast.makeText(getApplicationContext(), text, duration);
                 to.show();
+                String text1 = "You will recieve a notification when a match is made!";
+                Toast t1 = Toast.makeText(getApplicationContext(), text1, duration);
+                t1.show();
+                startActivity(new Intent(BuddyConnect.this, Response.class));
             }
         });
 
@@ -48,6 +60,10 @@ public class BuddyConnect extends AppCompatActivity {
         Spinner workSpinner = (Spinner) findViewById(R.id.workoutspin);
         return workSpinner.getSelectedItem().toString();
 
+    }
+    private Boolean getResponse()
+    {
+        return Boolean.TRUE;
     }
     private String getGym()
     {
@@ -86,6 +102,22 @@ public class BuddyConnect extends AppCompatActivity {
     {
         EditText timeOf = (EditText)findViewById(R.id.time);
         return timeOf.getText().toString();
+    }
+
+    private void sendNotification(View view) {
+
+//Get an instance of NotificationManager//
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this).setSmallIcon(R.drawable.com_facebook_favicon_blue).setContentTitle("Match made!").setContentText("Buddy up now: Accept or Decline");
+        mBuilder.setAutoCancel(true);
+        Intent notificationIntent = new Intent(this, Response.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(contentIntent);
+
+        // Add as notification
+        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        manager.notify(0, mBuilder.build());
     }
 
 

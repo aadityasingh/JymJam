@@ -6,15 +6,15 @@
     <string name="gymPrompt">Choose Gym</string>
     <string name="workPrompt">Choose Workout</string>
     <string name="levelPrompt">Choose Level</string>
-        <string-array name = "gyms" >
-            <item> Burton-Conner </item>
-            <item> Masseh Hall </item>
-            <item> Baker </item>
-            <item> Stata </item>
-            <item> Zeisger Center </item>
-            <item> Johnson </item>
-        </string-array>
-    <string-array name = "workout" >
+    <string-array name="gyms">
+        <item> Burton-Conner </item>
+        <item> Masseh Hall </item>
+        <item> Baker </item>
+        <item> Stata </item>
+        <item> Zeisger Center </item>
+        <item> Johnson </item>
+    </string-array>
+    <string-array name="workout">
         <item> Body-weight </item>
         <item> Cardio </item>
         <item> Upper-body </item>
@@ -22,7 +22,7 @@
         <item> Core </item>
         <item> Strength </item>
     </string-array>
-    <string-array name = "level" >
+    <string-array name="level">
         <item> Beginner </item>
         <item> Intermediate </item>
         <item> Advanced </item>
