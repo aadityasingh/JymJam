@@ -27,12 +27,36 @@ public class BuddyConnect extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        String ipad = "18.189.101.95";
+        final Client socket = new Client(ipad, 1234);
+        socket.setClientCallback(new Client.ClientCallback () {
+            @Override
+            public void onMessage(String message) {
+            }
+
+            @Override
+            public void onConnect(Socket socket) {
+                //socket.send("Hello World!\n");
+                //socket.disconnect();
+            }
+
+            @Override
+            public void onDisconnect(Socket socket, String message) {
+            }
+
+            @Override
+            public void onConnectError(Socket socket, String message) {
+            }
+        });
+        socket.connect();
+
+
         Button fab = (Button) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                // Fill out relevant subfields
+                // Fill out relevant sub-fields
                 data = new String[7];
                 data[0] = getName();
                 data[1] = getPhone();
@@ -42,16 +66,16 @@ public class BuddyConnect extends AppCompatActivity {
                 data[5] = getLevel();
                 data[6] = getWorkout();
                 String tot = "";
-                for(m = 0; m < data.length; m++)
+                for(int m = 0; m < data.length; m++)
                 {
                     tot += data[m] + ":";
                 }
-                moveData(tot);
+                socket.send(tot);
                 int duration = Toast.LENGTH_LONG;
-                String text = "Application succesfully sent...";
+                String text = "Application successfully sent...";
                 Toast to = Toast.makeText(getApplicationContext(), text, duration);
                 to.show();
-                String text1 = "You will recieve a notification when a match is made!";
+                String text1 = "You will receive a notification when a match is made!";
                 Toast t1 = Toast.makeText(getApplicationContext(), text1, duration);
                 t1.show();
                 startActivity(new Intent(BuddyConnect.this, Response.class));
@@ -132,7 +156,7 @@ public class BuddyConnect extends AppCompatActivity {
         manager.notify(0, mBuilder.build());
     }
 
-    private void moveData(String tot)
+    private void initializeClient()
     {
         String ipad = "18.189.101.95";
         Client socket = new Client(ipad, 1234);
@@ -156,7 +180,6 @@ public class BuddyConnect extends AppCompatActivity {
             }
         });
         socket.connect();
-        socket.send(tot);
     }
 
 
