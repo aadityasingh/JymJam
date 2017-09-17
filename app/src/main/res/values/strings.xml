@@ -27,5 +27,6 @@
         <item> Intermediate </item>
         <item> Advanced </item>
     </string-array>
-
+    <string name="facebook_app_id">375517489527657</string>
+    <string name="fb_login_protocol_scheme">fb375517489527657</string>
 </resources>
