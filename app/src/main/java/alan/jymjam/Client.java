@@ -27,8 +27,7 @@ public class Client {
             public void run() {
                 socket = new Socket();
                 InetSocketAddress socketAddress = new InetSocketAddress(ip, port);
-                try
-                {
+                try {
                     socket.connect(socketAddress);
                     socketOutput = socket.getOutputStream();
                     socketInput = new BufferedReader(new InputStreamReader(socket.getInputStream()));

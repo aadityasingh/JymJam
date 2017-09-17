@@ -15,10 +15,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 import android.os.Bundle;
 
+import java.net.Socket;
 
-import io.socket.client.Socket;
-import io.socket.client.IO;
-import io.socket.emitter.Emitter;
+
+//import io.socket.client.Socket;
+//import io.socket.client.IO;
+//import io.socket.emitter.Emitter;
 
 public class BuddyConnect extends AppCompatActivity {
     String[] data;
@@ -36,38 +38,35 @@ public class BuddyConnect extends AppCompatActivity {
         name = inBundle.get("name").toString();
         surname = inBundle.get("surname").toString();
         imageUrl = inBundle.get("imageUrl").toString();
-        //begin random copy-pasted stuff
-        final Socket socket;
-        try{
-            socket = IO.socket("http://18.189.101.95:1234");
-            socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
+        final Client socket = new Client("10.182.6.84", 8081);
+        socket.setClientCallback(new Client.ClientCallback () {
+            @Override
+            public void onMessage(String message) {
+                // Message received back should be of the form: "First_Name Last_Name$Phone_Number"
+                Intent next = new Intent(BuddyConnect.this, Decision.class);
+                String[] info = new String[2];
+                info = message.split("$");
+                next.putExtra("name", info[0]);
+                next.putExtra("phone", info[1]);
+                startActivity(next);
+            }
 
-                @Override
-                public void call(Object... args) {
-                    socket.emit("message", "hi");
-                    socket.disconnect();
-                }
+            @Override
+            public void onConnect(Socket socket) {
+//                socket.send("Hello World!\n");
+//                socket.disconnect()
+            }
 
-            }).on("message", new Emitter.Listener() {
-                //message is the keyword for communication exchanges
-                @Override
-                public void call(Object... args) {
-                    socket.emit("message", "hi");
-                }
+            @Override
+            public void onDisconnect(Socket socket, String message) {
+            }
 
-            }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+            @Override
+            public void onConnectError(java.net.Socket socket, String message) {
+            }
+        });
 
-                @Override
-                public void call(Object... args) {}
-
-            });
-            socket.connect();
-
-        }
-        catch(Exception e){
-
-        }
-        //end random copy-pasted socket.io code
+        socket.connect();
 
         Button fab = (Button) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -78,25 +77,32 @@ public class BuddyConnect extends AppCompatActivity {
                 data = new String[7];
                 data[0] = getName();
                 data[1] = getPhone();
-                data[2] = getDate();
-                data[3] = getTime();
                 data[4] = getGym();
                 data[5] = getLevel();
                 data[6] = getWorkout();
                 String tot = "";
                 for(int m = 0; m < data.length; m++)
                 {
-                    tot += data[m] + ":";
+                    tot += data[m] + "$";
                 }
 
                 int duration = Toast.LENGTH_LONG;
-                String text = "Application successfully sent...";
-                Toast to = Toast.makeText(getApplicationContext(), text, duration);
-                to.show();
-                String text1 = "You will receive a notification when a match is made!";
-                Toast t1 = Toast.makeText(getApplicationContext(), text1, duration);
-                t1.show();
-                startActivity(new Intent(BuddyConnect.this, Response.class));
+                try {
+                    socket.send(tot);
+                    String text = "Application successfully sent...";
+                    Toast to = Toast.makeText(getApplicationContext(), text, duration);
+                    to.show();
+                    String text1 = "You will receive a notification when a match is made!";
+                    Toast t1 = Toast.makeText(getApplicationContext(), text1, duration);
+                    t1.show();
+                    startActivity(new Intent(BuddyConnect.this, Response.class));
+                }
+                catch (Exception e) {
+                    String text = "Oops! Something went wrong...";
+                    Toast to = Toast.makeText(getApplicationContext(), text, duration);
+                    to.show();
+                }
+
             }
         });
 
