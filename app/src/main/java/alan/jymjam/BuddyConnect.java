@@ -13,10 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-import java.net.Socket;
 import android.os.Bundle;
 
-import java.net.Socket;
+
+import io.socket.client.Socket;
+import io.socket.client.IO;
+import io.socket.emitter.Emitter;
 
 public class BuddyConnect extends AppCompatActivity {
     String[] data;
@@ -27,29 +29,39 @@ public class BuddyConnect extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String ipad = "18.189.101.95";
-        final Client socket = new Client(ipad, 1234);
-        socket.setClientCallback(new Client.ClientCallback () {
-            @Override
-            public void onMessage(String message) {
-            }
+        //begin random copy-pasted stuff
+        final Socket socket;
+        try{
+            socket = IO.socket("http://18.189.101.95:1234");
 
-            @Override
-            public void onConnect(Socket socket) {
-                //socket.send("Hello World!\n");
-                //socket.disconnect();
-            }
+            socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
 
-            @Override
-            public void onDisconnect(Socket socket, String message) {
-            }
+                @Override
+                public void call(Object... args) {
+                    socket.emit("message", "hi");
+                    socket.disconnect();
+                }
 
-            @Override
-            public void onConnectError(Socket socket, String message) {
-            }
-        });
-        socket.connect();
+            }).on("message", new Emitter.Listener() {
+                //message is the keyword for communication exchanges
+                @Override
+                public void call(Object... args) {
+                    socket.emit("message", "hi");
+                }
 
+            }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
+
+                @Override
+                public void call(Object... args) {}
+
+            });
+            socket.connect();
+
+        }
+        catch(Exception e){
+
+        }
+        //end random copy-pasted socket.io code
 
         Button fab = (Button) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +82,7 @@ public class BuddyConnect extends AppCompatActivity {
                 {
                     tot += data[m] + ":";
                 }
-                socket.send(tot);
+
                 int duration = Toast.LENGTH_LONG;
                 String text = "Application successfully sent...";
                 Toast to = Toast.makeText(getApplicationContext(), text, duration);
@@ -156,31 +168,7 @@ public class BuddyConnect extends AppCompatActivity {
         manager.notify(0, mBuilder.build());
     }
 
-    private void initializeClient()
-    {
-        String ipad = "18.189.101.95";
-        Client socket = new Client(ipad, 1234);
-        socket.setClientCallback(new Client.ClientCallback () {
-            @Override
-            public void onMessage(String message) {
-            }
 
-            @Override
-            public void onConnect(Socket socket) {
-                //socket.send("Hello World!\n");
-                //socket.disconnect();
-            }
-
-            @Override
-            public void onDisconnect(Socket socket, String message) {
-            }
-
-            @Override
-            public void onConnectError(Socket socket, String message) {
-            }
-        });
-        socket.connect();
-    }
 
 
 }
