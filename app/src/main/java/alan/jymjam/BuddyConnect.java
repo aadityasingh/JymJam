@@ -41,8 +41,12 @@ public class BuddyConnect extends AppCompatActivity {
                 data[4] = getGym();
                 data[5] = getLevel();
                 data[6] = getWorkout();
-
-                moveData(data);
+                String tot = "";
+                for(m = 0; m < data.length; m++)
+                {
+                    tot += data[m] + ":";
+                }
+                moveData(tot);
                 int duration = Toast.LENGTH_LONG;
                 String text = "Application succesfully sent...";
                 Toast to = Toast.makeText(getApplicationContext(), text, duration);
@@ -128,7 +132,7 @@ public class BuddyConnect extends AppCompatActivity {
         manager.notify(0, mBuilder.build());
     }
 
-    private void moveData(String[] dat)
+    private void moveData(String tot)
     {
         String ipad = "18.189.101.95";
         Client socket = new Client(ipad, 1234);
@@ -152,7 +156,7 @@ public class BuddyConnect extends AppCompatActivity {
             }
         });
         socket.connect();
-        socket.send(dat);
+        socket.send(tot);
     }
 
 
