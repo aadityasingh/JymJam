@@ -27,6 +27,8 @@ public class BuddyConnect extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Fill out relevant subfields
                 data = new String[7];
                 data[0] = getName();
                 data[1] = getPhone();
@@ -35,6 +37,8 @@ public class BuddyConnect extends AppCompatActivity {
                 data[4] = getGym();
                 data[5] = getLevel();
                 data[6] = getWorkout();
+
+
                 int duration = Toast.LENGTH_LONG;
                 String text = "Application succesfully sent...";
                 Toast to = Toast.makeText(getApplicationContext(), text, duration);
