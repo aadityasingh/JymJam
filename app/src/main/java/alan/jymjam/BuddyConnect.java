@@ -20,12 +20,20 @@ import java.net.Socket;
 
 public class BuddyConnect extends AppCompatActivity {
     String[] data;
+    String name;
+    String surname;
+    String imageUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buddy_connect);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Bundle inBundle = getIntent().getExtras();
+        name = inBundle.get("name").toString();
+        surname = inBundle.get("surname").toString();
+        imageUrl = inBundle.get("imageUrl").toString();
 
         String ipad = "18.189.101.95";
         final Client socket = new Client(ipad, 1234);
@@ -86,7 +94,11 @@ public class BuddyConnect extends AppCompatActivity {
         can.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(BuddyConnect.this, UserInterface.class));
+                Intent next = new Intent(BuddyConnect.this, UserInterface.class);
+                next.putExtra("name", name);
+                next.putExtra("surname", surname);
+                next.putExtra("imageUrl", imageUrl);
+                startActivity(next);
             }
         });
     }
@@ -117,9 +129,9 @@ public class BuddyConnect extends AppCompatActivity {
 
     private String getName()
     {
-        EditText nameOfuser = (EditText)findViewById(R.id.name);
-        return nameOfuser.getText().toString();
-
+//        EditText nameOfuser = (EditText)findViewById(R.id.name);
+//        return nameOfuser.getText().toString();
+        return "" + name + " " + surname;
     }
 
     private String getPhone()
