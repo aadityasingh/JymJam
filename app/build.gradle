@@ -29,5 +29,9 @@ dependencies {
     compile 'com.android.support:design:25.3.1'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
     compile 'com.android.support:support-v4:24.1.1'
+    compile ('io.socket:socket.io-client:1.0.0') { //socket.io stuff
+        // excluding org.json which is provided by Android
+        exclude group: 'org.json', module: 'json'
+    }
     testCompile 'junit:junit:4.12'
 }
