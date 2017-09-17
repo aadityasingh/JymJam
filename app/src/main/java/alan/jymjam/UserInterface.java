@@ -29,9 +29,9 @@ public class UserInterface extends AppCompatActivity {
         setContentView(R.layout.activity_user_interface);
 
         Bundle inBundle = getIntent().getExtras();
-        String name = inBundle.get("name").toString();
-        String surname = inBundle.get("surname").toString();
-        String imageUrl = inBundle.get("imageUrl").toString();
+        final String name = inBundle.get("name").toString();
+        final String surname = inBundle.get("surname").toString();
+        final String imageUrl = inBundle.get("imageUrl").toString();
 
         TextView nameView = (TextView)findViewById(R.id.nameAndSurname);
         nameView.setText("" + name + " " + surname);
@@ -52,7 +52,11 @@ public class UserInterface extends AppCompatActivity {
        // Button pt = (Button)findViewById(R.id.pt);
         bud.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(UserInterface.this, BuddyConnect.class));
+                Intent next = new Intent(UserInterface.this, BuddyConnect.class);
+                next.putExtra("name", name);
+                next.putExtra("surname", surname);
+                next.putExtra("imageUrl", imageUrl);
+                startActivity(next);
             }
         });
 /*
