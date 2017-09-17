@@ -16,7 +16,7 @@ public class Login extends AppCompatActivity {
 
     private TextView info;
     private LoginButton loginButton;
-    private CallbackManager callbackManager;
+    private CallbackManager callbackManager = CallbackManager.Factory.create();
 
 //    CallbackManager callbackManager;
 //    @Override
