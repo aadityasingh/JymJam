@@ -14,17 +14,18 @@ public class UserInterface extends AppCompatActivity {
         setContentView(R.layout.activity_user_interface);
 
         Button bud = (Button) findViewById(R.id.buddy);
-        Button pt = (Button)findViewById(R.id.pt);
+       // Button pt = (Button)findViewById(R.id.pt);
         bud.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(UserInterface.this, BuddyConnect.class));
             }
         });
-
+/*
         pt.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
             }
         });
+        */
     }
 }

@@ -16,20 +16,20 @@
         tools:layout_editor_absoluteX="125dp"
         tools:layout_editor_absoluteY="181dp" />
 
-    <Button
-        android:id="@+id/pt"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Personal Trainer"
-        tools:layout_editor_absoluteX="118dp"
-        tools:layout_editor_absoluteY="294dp" />
+        <Button
+            android:id="@+id/pt"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Personal Trainer"
+            tools:layout_editor_absoluteX="118dp"
+            tools:layout_editor_absoluteY="294dp" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Please select one of the following:"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="25dp" />
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please select one of the following:"
+            tools:layout_editor_absoluteX="26dp"
+            tools:layout_editor_absoluteY="25dp" />
+    </android.support.constraint.ConstraintLayout>

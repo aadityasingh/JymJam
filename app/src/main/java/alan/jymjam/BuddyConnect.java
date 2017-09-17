@@ -12,8 +12,8 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class BuddyConnect extends AppCompatActivity {
-    @Override
     String[] data;
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buddy_connect);
@@ -24,7 +24,8 @@ public class BuddyConnect extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                data = {getName(), getPhone(), getDate(), getTime(), getGym(), getLevel(), getWorkout()};
+                data = new String[5];
+                //{getName();, getPhone();, getDate();, getTime();, getGym();, getLevel();, getWorkout();};
                 int duration = Toast.LENGTH_LONG;
                 String text = "Finding other users...";
                 Toast to = Toast.makeText(getApplicationContext(), text, duration);
