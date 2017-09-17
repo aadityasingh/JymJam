@@ -1,3 +1,5 @@
+package alan.jymjam;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -89,8 +91,8 @@ public class Client {
 
     public interface ClientCallback {
         void onMessage(String message);
-        void onConnect(Socket socket);
-        void onDisconnect(Socket socket, String message);
-        void onConnectError(Socket socket, String message);
+        void onConnect(Client socket);
+        void onDisconnect(Client socket, String message);
+        void onConnectError(Client socket, String message);
     }
 }

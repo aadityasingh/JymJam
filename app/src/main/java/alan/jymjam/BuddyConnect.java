@@ -13,6 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+import java.net.Socket;
+import android.os.Bundle;
+
+import java.net.Socket;
 
 public class BuddyConnect extends AppCompatActivity {
     String[] data;
@@ -38,7 +42,7 @@ public class BuddyConnect extends AppCompatActivity {
                 data[5] = getLevel();
                 data[6] = getWorkout();
 
-
+                moveData(data);
                 int duration = Toast.LENGTH_LONG;
                 String text = "Application succesfully sent...";
                 Toast to = Toast.makeText(getApplicationContext(), text, duration);
@@ -122,6 +126,32 @@ public class BuddyConnect extends AppCompatActivity {
         // Add as notification
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         manager.notify(0, mBuilder.build());
+    }
+
+    private void moveData(String[] dat)
+    {
+        String ipad = "18.189.101.95";
+        Client socket = new Client(ipad, 1234);
+        socket.setClientCallback(new Client.ClientCallback () {
+            @Override
+            public void onMessage(String message) {
+            }
+
+            @Override
+            public void onConnect(Client socket) {
+                socket.send("Hello World!\n");
+                socket.disconnect();
+            }
+
+            @Override
+            public void onDisconnect(Client socket, String message) {
+            }
+
+            @Override
+            public void onConnectError(Client socket, String message) {
+            }
+        });
+
     }
 
 
