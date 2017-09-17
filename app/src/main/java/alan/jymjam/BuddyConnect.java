@@ -1,5 +1,6 @@
 package alan.jymjam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,6 +31,14 @@ public class BuddyConnect extends AppCompatActivity {
                 String text = "Finding other users...";
                 Toast to = Toast.makeText(getApplicationContext(), text, duration);
                 to.show();
+            }
+        });
+
+        Button can = (Button) findViewById(R.id.cancel);
+        can.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(BuddyConnect.this, UserInterface.class));
             }
         });
     }
