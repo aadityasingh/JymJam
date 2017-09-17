@@ -13,6 +13,11 @@ public class UserInterface extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_interface);
 
+        Bundle inBundle = getIntent().getExtras();
+        String name = inBundle.get("name").toString();
+        String surname = inBundle.get("surname").toString();
+        String imageUrl = inBundle.get("imageUrl").toString();
+
         Button bud = (Button) findViewById(R.id.buddy);
        // Button pt = (Button)findViewById(R.id.pt);
         bud.setOnClickListener(new View.OnClickListener() {
