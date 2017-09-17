@@ -138,20 +138,21 @@ public class BuddyConnect extends AppCompatActivity {
             }
 
             @Override
-            public void onConnect(Client socket) {
-                socket.send("Hello World!\n");
-                socket.disconnect();
+            public void onConnect(Socket socket) {
+                //socket.send("Hello World!\n");
+                //socket.disconnect();
             }
 
             @Override
-            public void onDisconnect(Client socket, String message) {
+            public void onDisconnect(Socket socket, String message) {
             }
 
             @Override
-            public void onConnectError(Client socket, String message) {
+            public void onConnectError(Socket socket, String message) {
             }
         });
-
+        socket.connect();
+        socket.send(dat);
     }
 
 
