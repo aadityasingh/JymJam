@@ -38,7 +38,7 @@ public class BuddyConnect extends AppCompatActivity {
         name = inBundle.get("name").toString();
         surname = inBundle.get("surname").toString();
         imageUrl = inBundle.get("imageUrl").toString();
-        final Client socket = new Client("10.182.6.84", 8081);
+        final Client socket = new Client("10.182.6.84", 1234);
         socket.setClientCallback(new Client.ClientCallback () {
             @Override
             public void onMessage(String message) {
@@ -154,18 +154,6 @@ public class BuddyConnect extends AppCompatActivity {
     {
         EditText phoneNum = (EditText)findViewById(R.id.phone);
         return phoneNum.getText().toString();
-    }
-
-    private String getDate()
-    {
-        EditText dateOf = (EditText)findViewById(R.id.date);
-        return dateOf.getText().toString();
-    }
-
-    private String getTime()
-    {
-        EditText timeOf = (EditText)findViewById(R.id.time);
-        return timeOf.getText().toString();
     }
 
     private void sendNotification(View view) {
