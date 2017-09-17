@@ -1,8 +1,10 @@
 package alan.jymjam;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -16,10 +18,14 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+
+import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
 
@@ -62,7 +68,9 @@ public class Login extends AppCompatActivity {
         accessTokenTracker.startTracking();
         profileTracker.startTracking();
         if (isLoggedIn()) {
-            startActivity(new Intent(Login.this, UserInterface.class));
+            Profile profile = Profile.getCurrentProfile();
+            nextActivity(profile);
+//            startActivity(new Intent(Login.this, UserInterface.class));
         }
         setContentView(R.layout.activity_login);
         LoginButton loginButton = (LoginButton)findViewById(R.id.login_button);
@@ -74,6 +82,7 @@ public class Login extends AppCompatActivity {
                 nextActivity(profile);
                 Toast.makeText(getApplicationContext(), "Logging in...", Toast.LENGTH_SHORT).show();    }
 
+
             @Override
             public void onCancel() {
             }
@@ -84,37 +93,7 @@ public class Login extends AppCompatActivity {
         };
         loginButton.setReadPermissions("user_friends");
         loginButton.registerCallback(callbackManager, callback);
-//        info = (TextView)findViewById(R.id.info);
-//        loginButton = (LoginButton)findViewById(R.id.login_button);
-//        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-//            @Override
-//            public void onSuccess(LoginResult loginResult) {
-//                /*info.setText(
-//                        "User ID: "
-//                                + loginResult.getAccessToken().getUserId()
-//                                + "\n" +
-//                                "Auth Token: "
-//                                + loginResult.getAccessToken().getToken()
-//                ); */
-//                startActivity(new Intent(Login.this, UserInterface.class));
-//            }
-//
-//            @Override
-//            public void onCancel() {
-//                info.setText("Login attempt canceled.");
-//            }
-//
-//            @Override
-//            public void onError(FacebookException e) {
-//                info.setText("Login attempt failed.");
-//            }
-//        });
     }
-
-/// /    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        callbackManager.onActivityResult(requestCode, resultCode, data);
-//    }
 
     @Override
     protected void onResume() {
