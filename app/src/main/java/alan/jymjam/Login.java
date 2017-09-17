@@ -3,6 +3,10 @@ package alan.jymjam;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+
+import static android.provider.AlarmClock.EXTRA_MESSAGE;
 import android.widget.TextView;
 
 import com.facebook.CallbackManager;
@@ -48,10 +52,9 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
-
 }

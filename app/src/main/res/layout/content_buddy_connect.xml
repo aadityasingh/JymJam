@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="alan.jymjam.BuddyConnect"
+    tools:showIn="@layout/activity_buddy_connect">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/edit_message"
+        android:text="Please enter the following information:"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="18dp" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="53dp" />
+
+    <EditText
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="phone"
+        android:text="Phone #"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="110dp" />
+
+    <Spinner
+        android:id="@+id/gymspin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:prompt="@string/gymPrompt"
+        android:entries="@array/gyms"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="212dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose an MIT Gym:"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="181dp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="When will you go to the gym?"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="257dp" />
+
+    <EditText
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="time"
+        android:text="Enter Time"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="340dp" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:text="Enter Date"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="289dp" />
+    <Spinner
+        android:id="@+id/workoutspin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:prompt="@string/workPrompt"
+        android:entries="@array/workout"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="499dp" />
+    <Spinner
+        android:id="@+id/levelspin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:prompt="@string/levelPrompt"
+        android:entries="@array/level"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="424dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select level"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="395dp" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select workout type"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="466dp" />
+
+    <Button
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit!"
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="539dp" />
+
+</android.support.constraint.ConstraintLayout>
